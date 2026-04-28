@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/aliou9sow6/expresso#readme",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "mongodb": "^7.2.0",
     "mongoose": "^9.5.0",
     "update": "^0.7.4"
   },
