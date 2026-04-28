@@ -1,0 +1,32 @@
+{
+  "name": "expresso",
+  "version": "1.0.0",
+  "description": "Express Js api with mongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aliou9sow6/expresso.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/aliou9sow6/expresso/issues"
+  },
+  "homepage": "https://github.com/aliou9sow6/expresso#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.5.0",
+    "update": "^0.7.4"
+  },
+  "devDependencies": {
+    "@ljharb/tsconfig": "^0.3.2",
+    "@tsconfig/node18": "^18.2.6",
+    "@tsconfig/recommended": "^1.0.13"
+  }
+}
