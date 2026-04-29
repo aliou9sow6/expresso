@@ -1,82 +1,11 @@
 const express = require('express');
-const User = require('../models/user');
-
 const router = express.Router();
+const userController = require('../controllers/userController');
 
-// url: /api/users
-// urlComplete: http://localhost:5000/api/users
-// GET    : http://localhost:5000/api/users
-// POST   : http://localhost:5000/api/users
-// GET    : http://localhost:5000/api/users/:id
-// PUT    : http://localhost:5000/api/users/:id
-// DELETE : http://localhost:5000/api/users/:id
-
-
-// Create a new user
-router.post('/', async (req, res) => {
-  try {
-    console.log('Request body:', req.body); // Debug log
-    
-    // Validate required fields
-    if (!req.body.name || !req.body.email || !req.body.password) {
-      return res.status(400).json({ 
-        error: 'Missing required fields: name, email, password' 
-      });
-    }
-    
-    const user = new User(req.body);
-    const savedUser = await user.save();
-    res.status(201).json(savedUser);
-  } catch (error) {
-    console.error('Error details:', error); // Debug log
-    res.status(400).json({ error: error.message });
-  }
-});
-
-// Read all users
-router.get('/', async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Read one user by ID
-router.get('/:id', async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Update a user by ID
-router.put('/:id', async (req, res) => {
-  try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!updatedUser) return res.status(404).json({ message: 'User not found' });
-    res.json(updatedUser);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-// Delete a user by ID
-router.delete('/:id', async (req, res) => {
-  try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
-    if (!deletedUser) return res.status(404).json({ message: 'User not found' });
-    res.json({ message: 'User deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.post('/', userController.createUser);
+router.get('/', userController.getAllUsers);
+router.get('/:id', userController.getUserById);
+router.put('/:id', userController.updateUser);
+router.delete('/:id', userController.deleteUser);
 
 module.exports = router;
