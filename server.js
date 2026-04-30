@@ -3,6 +3,7 @@ require('dotenv').config(); // Load environment variables from .env file
 const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
+const projectRoutes = require('./routes/projectRoutes');
 
 const app = express();
 app.use(express.json());
@@ -18,6 +19,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/portfolio
 
 // Use user routes
 app.use('/api/users', userRoutes);
+
+// Use project routes
+app.use('/api/projects', projectRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
